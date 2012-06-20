@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Amazon Web Services Report Visualizer (Charts)</title>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-18530675-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</head>
+<body>
+	<a href="index.html">Back to main page</a>
+
+	{% for service_entry in chart_data %}
+		{% for operation_entry in service_entry.operations %}
+			<h1>{{ service_entry.service|escape }} :: {{ operation_entry.operation|escape }}</h1>
+			{% for usage_entry in operation_entry.usagetypes %}
+				<h2>{{ usage_entry.usagetype|escape }}</h2>
+				<iframe src="draw.cgi?sechash={{ sechash|urlencode|escape }}&nocache_value={{ usage_entry.nocache_id|urlencode|escape }}" width="{{ chart_w_wider|escape }}" height="{{ chart_h_wider|escape }}">Your browser does not support iframes :(</iframe><br>
+				<div style="display: none;" id="{{ usage_entry.nocache_id|escape }}">
+					<br>
+					Data series:<br>
+					<table border="1" cellspacing="0" cellpadding="5">
+					<thead>
+					<tr>
+						<th>Date/time</th>
+						<th>Hours diff</th>
+						<th>Value</th>
+					</tr>
+					</thead>
+					{% for value_entry in usage_entry.values %}
+					<tr>
+						<td>{{ value_entry.starttime|escape }}</td>
+						<td>{{ value_entry.hours_diff|escape }}</td>
+						<td>{{ value_entry.value|escape }}</td>
+					</tr>
+					{% endfor %}
+					</table>
+				</div>
+				<a href="#" onclick="document.getElementById('{{ usage_entry.nocache_id|escape }}').style.display = 'block'; return false;">Show data series</a>
+			{% endfor %}
+		{% endfor %}
+	{% endfor %}
+</body>
+</html>

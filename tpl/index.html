@@ -1,0 +1,97 @@
+<html>
+<head>
+	<title>Amazon Web Services Report Visualizer</title>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-18530675-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="/static/sinorca/sinorca-screen.css" media="screen" title="Sinorca (screen)" />
+	<link rel="stylesheet alternative" type="text/css" href="/static/sinorca/sinorca-screen-alt.css" media="screen" title="Sinorca (alternative)" />
+	<link rel="stylesheet" type="text/css" href="/static/sinorca/sinorca-print.css" media="print" />
+</head>
+<body>
+<div id="header">
+	<div class="midHeader">
+		<h1 class="headerTitle">Amazon Web Services Report Visualizer</h1>
+	</div>
+</div>
+<div id="main-copy" style="margin: 0 0 0 0">
+	<p>
+		<font color="red"><strong>This project has been discontinued<br>
+		due to lack of public interest and because Amazon are changing their format every few months.</strong></font>
+		<br>You can <a href="/static/aws-chart-report/source.tgz">download the sources</a> and use them as you need for free.
+	</p>
+	<h1>What is this?</h1>
+	<p>
+	This simple web tool lets you see your AWS Usage Reports by visualizing them in charts.
+	</p>
+	<h1>Why do I need this?</h1>
+	<p>
+	Analyzing the graphics lets you see the trends, and also transforms the raw numbers of your AWS Account Activity into something
+	more beautiful and easy to analyze by humans.
+	</p>
+	<h1>Can I see some demo screenshots?</h1>
+	<p>
+	Sure. Here are some chart screenshots:
+	<ul>
+		<li><a target="_blank" href="/static/aws-chart-report/screenshots/AmazonEC2-RunInstances-DataTransfer-In-Bytes-chart.png">EC2 Data Transfer In-Bytes</a></li>
+		<li><a target="_blank" href="/static/aws-chart-report/screenshots/AmazonEC2-AssociateAddress-ElasticIP-Remap-chart.png">EC2 Elastic IP Addresses Remaps</a></li>
+		<li><a target="_blank" href="/static/aws-chart-report/screenshots/AmazonEC2-EBS-IO-Write-EBS-VolumeIOUsage-chart.png">EC2 EBS Total Volume I/O Write Requests</a></li>
+	</ul>
+	</p>
+	<h1>How can I use it?</h1>
+	<p>
+	Here are the steps:
+	<ol>
+		<li>Log in to your <a href="http://aws.amazon.com/account/" target="_blank">Amazon Web Services account</a> and then navigate to "Usage Reports". There you can download your Usage reports for different services.</li>
+		<li>Select "Amazon Elastic Compute Cloud" or "Amazon Simple Storage Service" (S3) from the Service menu.</li>
+		<li>There are certain filter criterias. You can leave the defaults or alter for you needs.</li>
+		<li>Click "Download report <b>(CSV)</b>" and save the file on your computer.</li>
+		<li>In the form below, on this web page, upload the CSV file and review the generated graphics by Google Charts.</li>
+	</ol>
+	</p>
+
+	<h1>Upload form</h1>
+	<form action="charts.cgi" enctype="multipart/form-data" method="post">
+	<p>
+		AWS report file, in CSV format: <input type="file" name="aws_csv_usage_report_file" size="30"><br>
+		Report Granularity: <select name="step">
+			<option value="1" selected>Hours</option>
+			<option value="24">Days</option>
+		</select>
+		<br><br>
+		<input type="submit" value="Upload">
+	</p>
+	</form>
+
+	<h1>Changelog</h1>
+	<ul>
+		<li>26/Jan/2011 - Fix for very big or very small numeric values, which are represented with an exponent.</li>
+		<li>19/Jan/2011 - Fix for empty lines, comma-delimited numeric values, decimal fraction. Date year format changed too.</li>
+		<li>03/Nov/2010 - Fix for reports which contain the extra empty field, and price. Date/time format changed too.</li>
+		<li>16/Oct/2010 - Fix for S3 reports which contain the extra "Resource" field.</li>
+		<li>17/Sep/2010 - Better web design.</li>
+		<li>13/Sep/2010 - Initial release.</li>
+	</ul>
+</div>
+<div id="footer">
+	<div class="left">
+		If you have any comments, leave them at my <a target="_blank" href="http://blog.famzah.net/2010/09/13/amazon-web-services-usage-report-visualizer/">blog page where this tool was announced</a>.
+	</div>
+
+	<br class="doNotDisplay doNotPrint" />
+
+	<div class="right">
+		This is an <a href="http://www.oswd.org/" class="doNotPrint" target="_blank">Open Source Web Design</a>.
+	</div>
+</div>
+</body>
+</html>

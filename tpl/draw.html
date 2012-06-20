@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type='application/javascript'>
+		// Send the POST when the page is loaded,
+		// which will replace this whole page with the retrieved chart.
+		function loadGraph() {
+			var frm = document.getElementById('post_form');
+			if (frm) {
+				frm.submit();
+			}
+		}
+	</script>
+</head>
+
+<body TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0" hspace="0" vspace="0" onload="loadGraph()">
+	<center>The chart is being generated...</center>
+	<form action='http://chart.apis.google.com/chart?chid={{ usage_entry.nocache_id|escape }}' method='POST' id="post_form">
+		<input type="hidden" name="chtt" value="{{ usage_entry.title|escape }}" />
+		<input type="hidden" name="chxt" value="x,y" />
+		<input type="hidden" name="chxl" value="0:|{{ usage_entry.start_label|escape }}|{{ usage_entry.end_label|escape }}" />
+		<input type="hidden" name="chxr" value="1,0,{{ usage_entry.values_y_max|escape }}" />
+		<input type="hidden" name="chm" value="B,3399CC44,0,0,0" />
+		<input type="hidden" name="chg" value="25,50" />
+		<input type="hidden" name="chs" value="{{ chart_w|escape }}x{{ chart_h|escape }}" />
+		<input type="hidden" name="cht" value="lc" />
+		<input type="hidden" name="chd" value="t:{{ usage_entry.values_y|escape }}" />
+		<input type="hidden" name="chds" value="0,{{ usage_entry.values_y_max|escape }}" />
+		<input type="submit" value="Generate chart manually" />
+	</form>
+	</frame>
+</body>
+</html>
